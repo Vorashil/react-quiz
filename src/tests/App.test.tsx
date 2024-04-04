@@ -35,7 +35,16 @@ describe('App component', () => {
         expect(await screen.findByText('Welcome to My Page')).toBeInTheDocument();
     })
 
-    test('Navigation to the login page', () => {
+    test('Navigation to the login page', async () => {
+        // GIVEN
+        render(<App/>)
+
+        // WHEN
+        const myPageNavLink = screen.getByText('Log in');
+        userEvent.click(myPageNavLink);
+
+        // THEN
+        expect(await screen.findByText('Login')).toBeInTheDocument();
     })
 
 
