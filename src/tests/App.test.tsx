@@ -1,6 +1,8 @@
 import {render, screen, within} from "@testing-library/react";
 import App from "../App";
 import userEvent from "@testing-library/user-event";
+import {BrowserRouter} from "react-router-dom";
+
 describe('App component', () => {
     test('Navigation bar is rendered', () => {
 
@@ -11,7 +13,7 @@ describe('App component', () => {
 
         // THEN
 
-        const homeLink = screen.getByText('home', {exact: false});
+        const homeLink = screen.getByText('Home', {exact: false});
         const myPageLink = screen.getByText('My Page');
         const loginLink = screen.getByText('Login');
 
@@ -20,7 +22,7 @@ describe('App component', () => {
         expect(loginLink).toBeInTheDocument();
     })
 
-    test('Navigation to the my page', () => {
+    test('Navigation to the my page', async () => {
 
         // GIVEN
         render(<App/>)
@@ -30,10 +32,11 @@ describe('App component', () => {
         userEvent.click(myPageNavLink);
 
         // THEN
-        expect(screen.getByText('Welcome to My Page')).toBeInTheDocument();
+        expect(await screen.findByText('Welcome to My Page')).toBeInTheDocument();
     })
 
-    test('Navigation to the login page', () => {})
+    test('Navigation to the login page', () => {
+    })
 
 
 })
